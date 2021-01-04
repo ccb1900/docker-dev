@@ -43,8 +43,8 @@ services:
     links:
       - redis-adminer
       - adminer
-      - php-fpm
-  php-fpm:
+      - fpm
+  fpm:
     build: ./php-fpm
     volumes:
       - ${WEB_PATH}:/var/www/html:cached
