@@ -1,7 +1,7 @@
 FROM php:7-fpm-alpine
 
 RUN sed -i "s@http://dl-cdn.alpinelinux.org/@https://mirrors.huaweicloud.com/@g" /etc/apk/repositories && \
-  apk update && apk add wget \
+  apk update && apk add wget make \
   && apk add freetype-dev jpeg-dev autoconf gcc g++ \
   && apk add libzip-dev \
   && apk add libsodium-dev \
@@ -12,5 +12,6 @@ RUN sed -i "s@http://dl-cdn.alpinelinux.org/@https://mirrors.huaweicloud.com/@g"
   && docker-php-ext-install -j$(nproc) zip \
   && docker-php-ext-install -j$(nproc) sodium \
   && docker-php-ext-install -j$(nproc) bcmath pdo_mysql \
-  && docker-php-ext-enable redis \
+  && pecl install redis \
+  && docker-php-ext-enable redis bcmath pdo_mysql \
   && rm -rf /var/cache/apk/* \

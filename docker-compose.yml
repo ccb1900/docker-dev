@@ -29,6 +29,7 @@ services:
     restart: always
     environment:
       REDIS_1_HOST: redis
+      REDIS_1_AUTH: test123
     links:
       - redis
   nginx:
