@@ -48,5 +48,11 @@ services:
     build: ./php-fpm
     volumes:
       - ${WEB_PATH}:/var/www/html:cached
+  cli:
+    build: ./php-cli
+    volumes:
+      - ${WEB_PATH}:/var/www
+    tty: true
+    
 
 
