@@ -1,8 +1,8 @@
+# FROM composer:1
 FROM php:7-alpine
-
 RUN sed -i "s@http://dl-cdn.alpinelinux.org/@https://mirrors.huaweicloud.com/@g" /etc/apk/repositories && \
 apk update && apk add wget \
-&& apk add freetype-dev jpeg-dev \
+&& apk add freetype-dev jpeg-dev autoconf gcc g++ \
 && apk add libzip-dev \
 && apk add libsodium-dev \
 && docker-php-ext-configure gd --with-freetype --with-jpeg \
@@ -11,6 +11,9 @@ apk update && apk add wget \
 && docker-php-ext-install -j$(nproc) gd \
   && docker-php-ext-install -j$(nproc) zip \
   && docker-php-ext-install -j$(nproc) sodium \
+  && docker-php-ext-install -j$(nproc) bcmath pdo_mysql \
+  && docker-php-ext-enable redis \
+  && rm -rf /var/cache/apk/* \
 && wget https://mirrors.aliyun.com/composer/composer.phar \
   && mv composer.phar /usr/local/bin/composer && \
 chmod a+x /usr/local/bin/composer && \
