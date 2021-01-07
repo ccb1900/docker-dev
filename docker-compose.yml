@@ -12,6 +12,8 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
       - ${DATA_PATH}/mysql:/var/lib/mysql
+    ports:
+      - 3306:3306
   adminer:
     build: ./adminer
     restart: always
@@ -24,12 +26,22 @@ services:
       - 6379:6379
     volumes:
       - ${DATA_PATH}/redis:/data
+      - ${LOG_PATH}/redis:/var/log/redis
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        compress: "true"
+        max-file: "30"
   redis-adminer:
     build: ./redis-adminer
     restart: always
     environment:
       REDIS_1_HOST: redis
       REDIS_1_AUTH: test123
+      REDIS_2_HOST: r-bp1cq7bgl0ddrjej86pd.redis.rds.aliyuncs.com
+      REDIS_2_AUTH: pn_test:Pn123456
+      REDIS_2_PORT: 6999
     links:
       - redis
   nginx:
@@ -54,6 +66,21 @@ services:
     volumes:
       - ${WEB_PATH}:/var/www
     tty: true
+  loki:
+    build: ./loki
+    ports:
+      - 4100:4100
+      - 3100:3100
+  grafana:
+    build: ./grafana
+    ports:
+      - 3000:3000
+  prometheus:
+    build: ./prometheus
+    volumes:
+      - ./prometheus/config:/etc/prometheus
+    ports:
+      - 9090:9090
     
 
 
