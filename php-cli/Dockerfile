@@ -2,7 +2,7 @@
 FROM php:7-alpine
 RUN sed -i "s@http://dl-cdn.alpinelinux.org/@https://mirrors.huaweicloud.com/@g" /etc/apk/repositories && \
 apk update && apk add wget \
-&& apk add freetype-dev make jpeg-dev autoconf gcc g++ \
+  && apk add freetype-dev make jpeg-dev autoconf gcc g++ openssl-dev curl-dev mongo-c-driver-static mongo-c-driver openssl-d-dev \
 && apk add libzip-dev \
 && apk add libsodium-dev \
 && docker-php-ext-configure gd --with-freetype --with-jpeg \
@@ -19,6 +19,6 @@ apk update && apk add wget \
 && wget https://mirrors.aliyun.com/composer/composer.phar \
   && mv composer.phar /usr/local/bin/composer && \
 chmod a+x /usr/local/bin/composer && \
-composer config -g repo.packagist composer https://mirrors.huaweicloud.com/repository/php/
+composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 WORKDIR /var/www/
 CMD [ "php" ]
