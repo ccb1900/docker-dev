@@ -13,5 +13,6 @@ RUN sed -i "s@http://dl-cdn.alpinelinux.org/@https://mirrors.huaweicloud.com/@g"
   && docker-php-ext-install -j$(nproc) sodium \
   && docker-php-ext-install -j$(nproc) bcmath pdo_mysql \
   && pecl install redis \
-  && docker-php-ext-enable redis bcmath pdo_mysql \
-  && rm -rf /var/cache/apk/* \
+  && pecl install mongodb \
+  && docker-php-ext-enable redis bcmath pdo_mysql mongodb \
+  && rm -rf /var/cache/apk/*

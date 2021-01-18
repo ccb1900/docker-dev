@@ -13,7 +13,8 @@ apk update && apk add wget \
   && docker-php-ext-install -j$(nproc) sodium \
   && docker-php-ext-install -j$(nproc) bcmath pdo_mysql \
   && pecl install redis \
-  && docker-php-ext-enable redis bcmath pdo_mysql \
+  && pecl install mongodb \
+  && docker-php-ext-enable mongodb redis bcmath pdo_mysql \
   && rm -rf /var/cache/apk/* \
 && wget https://mirrors.aliyun.com/composer/composer.phar \
   && mv composer.phar /usr/local/bin/composer && \
