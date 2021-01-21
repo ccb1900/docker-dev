@@ -106,6 +106,12 @@ services:
     tty: true
     volumes:
       - ${WEB_PATH}:/var/www
+  portainer:
+    build: ./portainer
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 19000:9000
 
     
 
