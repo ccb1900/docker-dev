@@ -1,0 +1,1 @@
+FROM sonarqube:8.6.1-community
