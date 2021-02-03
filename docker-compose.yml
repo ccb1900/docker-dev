@@ -116,6 +116,18 @@ services:
     build: ./sonarqube
     ports:
       - 29000:9000
+    environment:
+      SONARQUBE_JDBC_USERNAME: postgres
+      SONARQUBE_JDBC_PASSWORD: ${POSTGRES_ROOT_PASSWORD}
+      SONARQUBE_JDBC_URL: jdbc:postgresql://postgres/sonarqube
+    links:
+      - postgres
+  postgres:
+    build: ./postgresql
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_ROOT_PASSWORD}
+    ports:
+      - 5432:5432
 
     
 
