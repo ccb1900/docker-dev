@@ -128,7 +128,17 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_ROOT_PASSWORD}
     ports:
       - 5432:5432
-
+  elasticsearch:
+    build: ./elasticsearch
+  logstash: 
+    build: ./logstash
+    volumes: 
+      - ./logstash/pipeline:/usr/share/logstash/pipeline
+    #   - ./logstash/config:/usr/share/logstash/config
+  kibana:
+    build: ./kibana
+    ports: 
+      - 5601:5601
     
 
 
