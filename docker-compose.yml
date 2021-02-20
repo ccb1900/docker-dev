@@ -84,6 +84,8 @@ services:
   mongo:
     build: ./monogo
     restart: always
+    volumes: 
+      - ${DATA_PATH}/mongo:/data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
