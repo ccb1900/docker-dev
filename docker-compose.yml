@@ -132,8 +132,17 @@ services:
       - 5432:5432
   elasticsearch:
     build: ./elasticsearch
+    environment: 
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
   logstash: 
     build: ./logstash
+    environment:
+      LS_JAVA_OPTS: "-Xmx512m -Xms512m"
     volumes: 
       - ./logstash/pipeline:/usr/share/logstash/pipeline
     #   - ./logstash/config:/usr/share/logstash/config
