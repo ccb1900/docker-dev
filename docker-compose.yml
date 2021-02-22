@@ -132,9 +132,15 @@ services:
       - 5432:5432
   elasticsearch:
     build: ./elasticsearch
+    ports:
+      - 9200:9200
     environment: 
       - discovery.type=single-node
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - http.cors.enabled=true
+      - http.cors.allow-origin=http://localhost:1358,http://127.0.0.1:1358
+      - http.cors.allow-headers=X-Requested-With,X-Auth-Token,Content-Type,Content-Length,Authorization
+      - http.cors.allow-credentials=true
     ulimits:
       memlock:
         soft: -1
@@ -150,6 +156,10 @@ services:
     build: ./kibana
     ports: 
       - 5601:5601
+  dejavu:
+    image: appbaseio/dejavu
+    ports: 
+      - 1358:1358
     
 
 
