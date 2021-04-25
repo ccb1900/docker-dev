@@ -3,7 +3,7 @@ FROM php:7-alpine
 RUN \
   sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories  && \
 apk update && apk add wget icu-dev \
-  && apk add freetype-dev make jpeg-dev autoconf gcc g++ openssl-dev curl-dev mongo-c-driver-static mongo-c-driver openssl-d-dev \
+  && apk add freetype-dev make jpeg-dev autoconf gcc g++ openssl-dev curl-dev mongo-c-driver-static mongo-c-driver openssl-dev \
 && apk add libzip-dev \
 && apk add libsodium-dev \
 && docker-php-ext-configure gd --with-freetype --with-jpeg \
