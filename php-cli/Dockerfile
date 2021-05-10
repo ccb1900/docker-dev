@@ -21,5 +21,5 @@ apk update && apk add wget icu-dev \
   && mv composer.phar /usr/local/bin/composer && \
 chmod a+x /usr/local/bin/composer && \
 composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
-WORKDIR /var/www/
+WORKDIR /var/www/app
 CMD [ "php" ]

@@ -54,7 +54,7 @@ services:
       - ./nginx/conf:/etc/nginx/conf.d
       - ./nginx/ssl:/etc/nginx/ssl
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ${WEB_PATH}:/var/www
+      - ${WEB_PATH}:/var/www/app
     links:
       - redis-adminer
       - adminer
@@ -63,11 +63,11 @@ services:
   fpm:
     build: ./php-fpm
     volumes:
-      - ${WEB_PATH}:/var/www/html:cached
+      - ${WEB_PATH}:/var/www/app
   cli:
     build: ./php-cli
     volumes:
-      - ${WEB_PATH}:/var/www
+      - ${WEB_PATH}:/var/www/app
     tty: true
   loki:
     build: ./loki

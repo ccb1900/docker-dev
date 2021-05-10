@@ -18,3 +18,5 @@ RUN \
   && pecl install mongodb \
   && docker-php-ext-enable redis bcmath pdo_mysql mongodb intl \
   && rm -rf /var/cache/apk/*
+
+  WORKDIR /var/www
