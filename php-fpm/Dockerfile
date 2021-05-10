@@ -12,7 +12,7 @@ RUN \
   && docker-php-ext-install -j$(nproc) gd \
   && docker-php-ext-install -j$(nproc) zip \
   && docker-php-ext-install -j$(nproc) sodium \
-  && docker-php-ext-install -j$(nproc) bcmath pdo_mysql intl
+  && docker-php-ext-install -j$(nproc) bcmath pdo_mysql intl \
   && pecl channel-update pecl.php.net \
   && pecl install redis \
   && pecl install mongodb \
